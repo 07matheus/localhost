@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+#listagem .header {
+  background-color: var(--bs-dark-border-subtle);
+  color: var(--bs-dark-text);
+  font-size: 18px;
+  font-weight: bold;
+}
+#listagem .item .item-drop-down {
+  cursor: pointer;
+}
+#listagem .item .item-drop-down > svg {
+  display: none;
+}
+#listagem .item .item-drop-down.open > svg.open,
+#listagem .item .item-drop-down.close > svg.close {
+  display: block;
+}
+
