@@ -12,9 +12,26 @@ function getSites($id = null) {
   $sites   = file_get_contents(CONFIG);
   $retorno = [];
 
-  $retorno = json_decode($sites);
+  $retorno = json_decode($sites, true);
 
   return $retorno;
+}
+
+function formatarSite($nome, $url, $drop = []) {
+  $dados = [
+    'nome' => $nome,
+    'url'  => $url,
+    'drop' => $drop
+  ];
+
+  return json_encode($dados, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+}
+
+function setSites($dados = [], $forcar = false) {
+  if(empty($dados) && !$forcar) return;
+
+  $dados = json_encode($dados, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+  file_put_contents(CONFIG, $dados);
 }
 
 function getLayout($dir, $nameFile) {
@@ -25,6 +42,25 @@ function getLayout($dir, $nameFile) {
 
   return $layout;
 }
+
+function setLayout($target, $replace, $layout) {
+  return str_replace('{{'.$target.'}}', $replace, $layout);
+}
+
+function getMensagemAlerta($tipo, $mensagem) {
+  $tipo = !in_array($tipo, ['success', 'danger', 'warning']) ? 'success': $tipo;
+
+  $alerta = getLayout('alerta', 'html-alerta');
+  
+  // DEFINE DADOS DO ALERTA
+  $alerta = setLayout('tipo', $tipo, $alerta);
+  $alerta = setLayout('mensagem', $mensagem, $alerta);
+
+  return $alerta;
+}
+
+// ADICIONA O ARQUIVO DE SITES
+if(!file_exists(CONFIG)) setSites([], true);
 
 $constantesJS = [
   'const URL="'.URL.'";'
