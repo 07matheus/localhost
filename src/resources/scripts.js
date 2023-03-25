@@ -21,7 +21,6 @@ function novoSite() {
           urlSite: form.urlSite.value
         },
         success: data => {
-          console.log(data);
           document.getElementById('mensagem-formulario').innerHTML = data.message;
         },
         error: erro => {

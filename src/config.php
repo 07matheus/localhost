@@ -20,11 +20,12 @@ function getSites($id = null) {
 function formatarSite($nome, $url, $drop = []) {
   $dados = [
     'nome' => $nome,
-    'url'  => $url,
-    'drop' => $drop
+    'url'  => $url
   ];
 
-  return json_encode($dados, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+  if(!empty($drop)) $dados['drop'] = $drop;
+
+  return $dados;
 }
 
 function setSites($dados = [], $forcar = false) {
