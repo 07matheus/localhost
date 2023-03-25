@@ -44,8 +44,16 @@ function getLayout($dir, $nameFile) {
   return $layout;
 }
 
-function setLayout($target, $replace, $layout) {
-  return str_replace('{{'.$target.'}}', $replace, $layout);
+function setLayout($targets = [], $layout) {
+  if(!empty($targets)) {
+    foreach($targets as $target => $replace) {
+      if(is_array($replace)) continue;
+
+      $layout = str_replace('{{'.$target.'}}', $replace, $layout);
+    }
+  }
+
+  return $layout;
 }
 
 function getMensagemAlerta($tipo, $mensagem) {
