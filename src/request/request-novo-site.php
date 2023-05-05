@@ -10,7 +10,10 @@ if(isset($_POST) && !empty($_POST)) {
   ];
 
   $nome      = $_POST['nomeSite'];
-  $url       = $_POST['urlSite'];
+  $link      = $_POST['urlSite'];
+  $https     = ($_POST['https'] == 's') ? 'https://': 'http://';
+  $www       = ($_POST['www']   == 's') ? 'www.': null;
+  $url       = $https . $www . $link;
   $continuar = true;
 
   if(!strlen($nome) || !strlen($url)) {

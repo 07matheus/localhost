@@ -58,14 +58,14 @@ function setLayout($targets = [], $layout) {
 
 function getMensagemAlerta($tipo, $mensagem) {
   $tipo = !in_array($tipo, ['success', 'danger', 'warning']) ? 'success': $tipo;
-
-  $alerta = getLayout('alerta', 'html-alerta');
   
   // DEFINE DADOS DO ALERTA
-  $alerta = setLayout('tipo', $tipo, $alerta);
-  $alerta = setLayout('mensagem', $mensagem, $alerta);
+  $layout = [
+    'tipo'     => $tipo,
+    'mensagem' => $mensagem
+  ];
 
-  return $alerta;
+  return setLayout($layout, getLayout('alerta', 'html-alerta'));
 }
 
 // ADICIONA O ARQUIVO DE SITES

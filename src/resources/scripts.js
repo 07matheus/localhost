@@ -18,7 +18,9 @@ function novoSite() {
         dataType: 'json',
         data: {
           nomeSite: form.nomeSite.value,
-          urlSite: form.urlSite.value
+          urlSite : form.urlSite.value,
+          https   : form.https.value,
+          www     : form.www.value
         },
         success: data => {
           document.getElementById('mensagem-formulario').innerHTML = data.message;
