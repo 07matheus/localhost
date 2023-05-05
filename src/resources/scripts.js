@@ -2,6 +2,7 @@ function initListagem() {
   getConteudo('listagem', () => {
     initRemoverTodos();
     initDropDown();
+    initBotaoRemoverSite();
   });
 }
 
@@ -30,6 +31,30 @@ function novoSite() {
         }
       });
     });
+  });
+}
+
+function initBotaoRemoverSite() {
+  let botoes = document.querySelectorAll('[data-remover-site]');
+
+  botoes.forEach(elemento => {
+    elemento.addEventListener('click', () => removerSite(elemento, elemento.getAttribute('data-remover-site')));
+  });
+}
+
+function removerSite(elemento, idSite) {
+  $.ajax({
+    url: URL + 'src/request/request-remover-site.php',
+    method: 'POST',
+    dataType: 'json',
+    data: { idSite },
+    success: data => {
+      document.getElementById('alerta-listagem').innerHTML = data.mensagem;
+      if(data.status) elemento.parentElement.parentElement.remove();
+    },
+    error: error => {
+      console.error(error);
+    }
   });
 }
 

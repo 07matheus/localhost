@@ -14,7 +14,22 @@ function getSites($id = null) {
 
   $retorno = json_decode($sites, true);
 
+  if(!is_null($id)) $retorno = isset($retorno[$id]) ? $retorno[$id]: [0];
+
   return $retorno;
+}
+
+function removerSite($id) {
+  $status = false;
+  $sites  = getSites();
+
+  if(isset($sites[$id])) {
+    unset($sites[$id]);
+    setSites($sites, true);
+    $status = true;
+  }
+
+  return $status;
 }
 
 function formatarSite($nome, $url, $drop = []) {
@@ -31,8 +46,14 @@ function formatarSite($nome, $url, $drop = []) {
 function setSites($dados = [], $forcar = false) {
   if(empty($dados) && !$forcar) return;
 
-  $dados = json_encode($dados, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+  $dados = setJson($dados);
   file_put_contents(CONFIG, $dados);
+}
+
+function setJson($dados = []) {
+  if(!is_array($dados)) $dados = [];
+
+  return json_encode($dados, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 }
 
 function getLayout($dir, $nameFile) {

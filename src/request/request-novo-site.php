@@ -33,7 +33,7 @@ if(isset($_POST) && !empty($_POST)) {
     $response['message'] = getMensagemAlerta('success', 'Site cadastrado com sucesso!');
   }
 
-  $response = json_encode($response, JSON_UNESCAPED_SLASHES | JSON_FORCE_OBJECT | JSON_UNESCAPED_UNICODE);
+  $response = setJson($response);
 }
 
 echo $response;
