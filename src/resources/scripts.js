@@ -50,7 +50,9 @@ function removerSite(elemento, idSite) {
     data: { idSite },
     success: data => {
       document.getElementById('alerta-listagem').innerHTML = data.mensagem;
-      if(data.status) elemento.parentElement.parentElement.remove();
+      if(data.status) {
+        $('#itens-listagem').html(data.listagem);
+      }
     },
     error: error => {
       console.error(error);

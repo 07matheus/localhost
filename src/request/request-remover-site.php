@@ -13,6 +13,7 @@ if(!empty($_POST) || isset($_POST['idSite']) || is_numeric($_POST['idSite'])) {
   if(removerSite($idSite)) {
     $response['status']   = true;
     $response['mensagem'] = getMensagemAlerta('success', 'Site removido com sucesso!');
+    $response['listagem'] = getLayoutItensListagem();
   }
 }
 
