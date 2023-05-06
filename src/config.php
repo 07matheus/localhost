@@ -89,6 +89,10 @@ function getMensagemAlerta($tipo, $mensagem) {
   return setLayout($layout, getLayout('alerta', 'html-alerta'));
 }
 
+// FUNÇÕES ESPECÍFICAS DE LAYOUTS OU PROCESSAMENTO DE DADOS.
+// SÓ SERÁ MANTIDO NO ARQUIVO 'config', AS FUNÇÕES QUE SÃO DE USO GERAL 
+include_once ROOT . '/funcoes/funcoes.php';
+
 // ADICIONA O ARQUIVO DE SITES
 if(!file_exists(CONFIG)) setSites([], true);
 
